@@ -21,15 +21,13 @@ function prop (obj, name, val, flags) {
 function getter (obj, name, acc) {
   var descr = descriptor(obj, name)
   descr.get = accessor(acc)
-  Object.defineProperty(obj, name, descr)
-  return freeze(obj, name)
+  return Object.defineProperty(obj, name, descr)
 }
 
 function setter (obj, name, acc) {
   var descr = descriptor(obj, name)
   descr.set = accessor(acc)
-  Object.defineProperty(obj, name, descr)
-  return freeze(obj, name)
+  return Object.defineProperty(obj, name, descr)
 }
 
 function accessor (a) {
@@ -40,16 +38,6 @@ function accessor (a) {
 
 function descriptor (obj, name) {
   return Object.getOwnPropertyDescriptor(obj, name) || CONF
-}
-
-function freeze (obj, name) {
-  setImmediate(function () {
-    var descr = descriptor(obj, name)
-    descr.configurable = false
-    Object.defineProperty(obj, name, descr)
-  })
-
-  return obj
 }
 
 function noop (err) {

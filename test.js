@@ -53,10 +53,5 @@ test('getters/setters', function (t) {
   t.equal(obj.first, undefined)
   obj.first = 'stuff'
   t.equal(obj.first, 'stuff')
-
-  setImmediate(function () {
-    t.throws(function () { setter(obj, 'first', () => 'nope') })
-    t.equal(obj.first, 'stuff')
-    t.end()
-  })
+  t.end()
 })
